@@ -1,0 +1,139 @@
+﻿@model BarberShop.ViewModelManager.VMIsActiveBarbers
+
+@{
+    ViewData["Title"] = "Barbers";
+}
+
+<h1>הספרים שלי</h1>
+
+<p>
+    <a asp-action="Create">הוספת ספר</a>
+</p>
+@if(Model.ActiveBarbers.Count > 0 )
+{
+    <h3>ספרים פעילים</h3>
+    <table class="table" enctype="multipart/form-data">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActiveBarbers.First().FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActiveBarbers.First().Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActiveBarbers.First().PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActiveBarbers.First().Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActiveBarbers.First().MyImage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActiveBarbers.First().isActive)
+                </th>
+                <th>הפוך ספר ללא פעיל</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ActiveBarbers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                    @if(item.MyImage != null)
+                        {
+                            <img class="card-img-top" src="data:image;base64,@System.Convert.ToBase64String(item.MyImage)" width="90" height="60" />
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isActive)
+                    </td>
+                    <td>
+                        @Html.ActionLink("הפוך מצב","ChangeActive", new {id=item.ID})
+                        @*               @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@if (Model.NotActiveBarbers.Count > 0)
+{
+    <h3>ספרים לא פעילים</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NotActiveBarbers.First().FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NotActiveBarbers.First().Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NotActiveBarbers.First().PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NotActiveBarbers.First().Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NotActiveBarbers.First().MyImage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NotActiveBarbers.First().isActive)
+                </th>
+                <th>הפוך ספר לפעיל</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.NotActiveBarbers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                    @if (item.MyImage != null)
+                    {
+                            <img class="card-img-top" src="data:image;base64,@System.Convert.ToBase64String(item.MyImage)" width="90" height="60" />
+                    }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isActive)
+                    </td>
+                    <td>
+                        @Html.ActionLink("הפוך מצב","ChangeActive", new {id=item.ID,Model})
+                        @*               @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+}

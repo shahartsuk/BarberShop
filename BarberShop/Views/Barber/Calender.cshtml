@@ -1,0 +1,37 @@
+﻿@model BarberShop.ViewModelBarber.VMCalander
+
+@{
+    ViewData["Title"] = "Calender";
+}
+
+<h1>Calender</h1>
+
+<p>
+    <a asp-action="addProgram" asp-route-id="@Model.Appointments.First().HairCut.Barber.RND">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+        @foreach (var item in Model.Appointments) {
+            <th>
+                    @Html.DisplayNameFor(modelItem => item.DateTime.ToShortTimeString())
+            </th>
+        
+        }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Daily in Model.DailyAppointments)
+        {  
+        <tr>
+            @for (int i = 1; i <= Daily.Length; i++)
+            {
+                <td style=color:"@Daily[i].ColorStatus">
+                @i + " " + @Daily[i].DateTime.ToShortDateString()+" "+
+                @Daily[i].HairCut.Action.Name+" "+@Daily[i].ClientName
+                </td>
+            } 
+        </tr>
+        }
+    </tbody>
+</table>

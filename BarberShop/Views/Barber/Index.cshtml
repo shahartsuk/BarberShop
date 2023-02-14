@@ -1,0 +1,12 @@
+﻿@model BarberShop.Models.Barber
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>ספר</h1>
+<p>
+    <div><a asp-action="SelectAction" asp-route-id="@Model.IDRandom">הוספת תספורת</a></div>
+    <div><a asp-action="addProgram" asp-route-id="@Model.IDRandom">קביעת לוז</a></div>
+    <div><a asp-action="MyActions" asp-route-id="@Model.IDRandom">רשימת התספורות שלי</a></div>
+    <div><a asp-action="Calender" asp-route-id="@Model.IDRandom">לוז</a></div>
+</p>
